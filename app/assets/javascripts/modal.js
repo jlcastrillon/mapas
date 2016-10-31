@@ -1,12 +1,15 @@
 //= require jquery
 //= require jquery_ujs
+//= require angular
+//= require angular-animate
+//= require turbolinks
 //= require bootstrap
 
 
-  $("#new_import").on("ajax:success", (e, data, status, xhr) ->
-    $("#new_import").append xhr.responseText
+  $("#import").on("ajax:success", (e, data, status, xhr) ->
+    $("#import").append xhr.responseText
   ).on "ajax:error", (e, xhr, status, error) ->
-    $("#new_import").append "<p>ERROR</p>"
+    $("#import").append "<p>ERROR</p>"
 
 function myFunctionJS(){	
 
