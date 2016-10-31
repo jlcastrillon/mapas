@@ -8,6 +8,7 @@
 
 $('#import').bind('ajax:success', function() {
    $(this).fadeOut();
+   alert('ajax request');
 });
 
 function myFunctionJS(){	

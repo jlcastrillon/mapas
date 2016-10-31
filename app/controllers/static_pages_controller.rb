@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => :create
   respond_to :html, :json
   def import
     #@import = false;
