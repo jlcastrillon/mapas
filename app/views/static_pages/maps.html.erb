@@ -137,7 +137,7 @@
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
-          <%= link_to import_static_pages_path new_task_path, remote: true do %>
+          <%= link_to import_static_pages_path, "import", remote: true do %>
             <%= file_field_tag :file %>
             <%= submit_tag  "Import", :id => "importfile"%>
           <% end %>
