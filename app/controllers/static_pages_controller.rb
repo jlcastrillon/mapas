@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  protect_from_forgery except: :index
   def import
     #@import = false;
     #if request.post?
