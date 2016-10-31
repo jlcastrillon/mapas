@@ -6,10 +6,9 @@
 //= require bootstrap
 
 
-  $("#import").on("ajax:success", (e, data, status, xhr) ->
-    $("#import").append xhr.responseText
-  ).on "ajax:error", (e, xhr, status, error) ->
-    $("#import").append "<p>ERROR</p>"
+$('#import').bind('ajax:success', function() {
+   $(this).fadeOut();
+});
 
 function myFunctionJS(){	
 
