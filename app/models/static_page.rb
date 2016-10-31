@@ -8,7 +8,7 @@ class StaticPage
   	#	staticpage = find_by_id(row["id"]) || new
   	#	 staticpage.attributes = row.to_hash.slice(*accessible_attributes)
   	#	 staticpage.save!
-  	end
+  	#end
   end
 
   def self.import(file)
