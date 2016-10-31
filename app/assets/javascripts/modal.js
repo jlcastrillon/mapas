@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require home
 
 
   $("#new_import").on("ajax:success", (e, data, status, xhr) ->
