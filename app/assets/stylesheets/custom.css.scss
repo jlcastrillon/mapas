@@ -1,0 +1,142 @@
+
+/* Body */
+body{
+	padding-top: 140px;
+	padding-bottom: 100px;
+	background-image: url('/assets/fondomod2.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+
+}
+
+/* Cabecera. Color brand */
+.navbar-default .navbar-brand { 
+	color: #FFF;
+}
+
+/* Margen navbar */
+.navbar-right{
+	margin-right: 30px !important;
+}
+
+/* Panel */
+.panel {
+	margin-left: 350px;
+	max-width: 700px;
+}
+
+/* Dentro del panel */
+.panel-body{
+	margin-left: 50px;
+}
+
+/* Mapa */
+#map {
+	display: block;
+	height: 500px;
+	width: 70%;
+	margin-left: 50px;
+	margin-bottom: 50px;
+}
+
+.input-group{
+	margin-left: 50px;
+}
+
+/* Jumbotron */
+.jumbotron{
+	margin-right: 70px;
+	margin-left: 70px;
+}
+
+/* h4 de las ventanas modales */
+.modal-body h4{
+	border: 1px solid rgb(44, 62, 80);
+    border-radius: 10px;
+    background-color: rgb(229, 229, 229);
+    padding: 5px;
+    margin-top: 3px;
+}
+
+/* Caja de texto de las ventanas modales */
+.input-group{
+	margin-left: 30px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	width: 300px;
+}
+
+.form-control{
+	margin-bottom: 20px;
+}
+
+.div-col-green{
+	width: 25px;
+	height: 25px;
+	background-color: green;
+	border-color: black;
+
+}
+
+.div-col-blue{
+	width: 25px;
+	height: 25px;
+	background-color: blue;
+	border-color: black;
+
+}
+
+
+.div-col-red{
+	width: 25px;
+	height: 25px;
+	background-color: red;
+	border-color: black;
+
+}
+
+.div-col-gray{
+	width: 25px;
+	height: 25px;
+	background-color: gray;
+	border-color: black;
+
+}
+
+.div-col-black{
+	width: 25px;
+	height: 25px;
+	background-color: black;
+	border-color: black;
+
+}
+
+.div-col-yellow{
+	width: 25px;
+	height: 25px;
+	background-color: yellow;
+	border-color: black;
+
+}
+
+.div-col-orange{
+	width: 25px;
+	height: 25px;
+	background-color: orange;
+	border-color: black;
+	
+}
+
+.colorContainer{
+	float: left;
+    left-padding: 20;
+}
+
+.invisible{
+	background-color: white;
+	float: left;
+	width: 25px;
+	height: 25px;
+}
