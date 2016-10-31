@@ -1,4 +1,4 @@
-
+  
 <div class="jumbotron">
   <div class="container">
   <h1 align="center", style="margin-bottom: 40px; margin-top: 10px;">Mapas Temáticos</h1>
@@ -137,7 +137,7 @@
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4>
         <h2>Import Products</h2>
-          <%= form_tag import_static_pages_path(@StaticPage),:remote => true,:uploadForm => 'elm_id', multipart: true do %>
+          <%= form_tag import_static_pages_path(@StaticPage),:remote true,:uploadForm => 'elm_id', multipart: true do %>
             <%= file_field_tag :file %>
             <%= submit_tag  "Import", :id => "importfile"%>
           <% end %>
