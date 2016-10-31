@@ -6,9 +6,8 @@
 //= require bootstrap
 
 
-$('#import').bind('ajax:success', function() {
-   $(this).fadeOut();
-   alert('ajax request');
+$('#importForm').bind('ajax:success', function() {
+	console.log('ajax request');
 });
 
 function myFunctionJS(){	
