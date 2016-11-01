@@ -33,4 +33,7 @@ class StaticPagesController < ApplicationController
   def configuracionEstadistica
   end
 
+  def show
+  end
+
 end
