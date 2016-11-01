@@ -139,7 +139,7 @@
         <h2>Import Products</h2>
           <%= form_tag 'import', remote: true, :html => { :multipart => true },:id => "importForm" do |f|%>
             <%= file_field_tag :id => "file" %>
-            <%= submit_tags  "Import", remote: true, :id => "importfile"%>
+            <%= submit_tag  "Import", remote: true, :id => "importfile"%>
           <% end %>
       </div>
       <div class="modal-footer">
