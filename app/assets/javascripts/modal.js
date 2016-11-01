@@ -17,13 +17,13 @@ function myFunctionJS(){
 	importButton.disabled = true;
 	fileInput.value = null;
 
-	fileInput.onchange = function() {
-	    if(fileInput.value != null){
+	$('#file').on("change", function(){ 
+		 if($('#file').value != null){
 	    	importButton.disabled = false;
 	    }else{
 	    	importButton.disabled = true;
 	    }
-	}
+	});
 
 	$('.modal').on('hidden', function () {
 	  document.location.reload();
