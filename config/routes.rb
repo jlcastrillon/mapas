@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources: import
-
   get 'static_pages/maps'
   
   root to:              'static_pages#maps'
