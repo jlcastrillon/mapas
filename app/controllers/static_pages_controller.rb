@@ -3,9 +3,9 @@ class StaticPagesController < ApplicationController
   def import
     #@import = false;
     #if request.post?
-    @StaticPage =  StaticPage.import(params[:file])
+    @import =  StaticPage.import(params[:file])
     respond_to do |format|
-      format.js { render action: 'import' } 
+      format.js { redirect_to  'static_pages/import' } 
     end
 
   end
