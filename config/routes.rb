@@ -7,17 +7,16 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  #resources :static_pages do
-  #  collection do
-  #    post :import
-  #  end
-  #end
+  resources :static_pages do
+    collection do
+      post :import
+    end
+  end
 
   get 'static_pages/maps'
   
   root to:                 'static_pages#maps'
 
-  post 'static_pages/import' => 'static_pages#import'
 
   get 'help'    =>      'static_pages#help'
 

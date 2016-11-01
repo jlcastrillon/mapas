@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
     #if request.post?
     @StaticPage =  StaticPage.import(params[:file])
     respond_to do |format|
-      format.html
+      format.html {render :action => "new"}
       format.js
     end
 
