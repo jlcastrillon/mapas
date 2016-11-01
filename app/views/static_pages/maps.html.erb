@@ -137,9 +137,9 @@
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
-          <%= form_tag('static_pages/import', remote: true, :id => "importForm") do |f| %>
-            <%= file_field_tag :file %>
-            <%= submit_tag  "Import", :id => "importfile"%>
+          <%= form_for 'static_pages/import', remote: true, :id => "importForm" do |f|%>
+            <%= f.file_field :file %>
+            <%= f.submit  "Import", :id => "importfile"%>
           <% end %>
       </div>
       <div class="modal-footer">
