@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-
+  resources: import
 
   get 'static_pages/maps'
   
