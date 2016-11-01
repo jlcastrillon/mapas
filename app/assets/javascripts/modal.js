@@ -24,7 +24,9 @@ function myFunctionJS(){
 	  document.location.reload();
 	})
 
-	
+	$('#importform').on("ajax:remotipartComplete", function(e, data){
+	  console.log(e, data)
+	});
 
 	// Get the modal
 	var modal = document.getElementById('myModal1');
