@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
     #if request.post?
     @import =  StaticPage.import(params[:file])
     respond_to do |format|
-      format.js
+      format.js{alert('archivo subido correctamente')}
       format.html { redirect_to :back }
     end
 
