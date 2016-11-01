@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   root to:                 'static_pages#maps'
 
 
+  post 'static_pages/maps' => 'static_pages#maps'
+
   get 'help'    =>      'static_pages#help'
 
   get 'about'   =>      'static_pages#about'
