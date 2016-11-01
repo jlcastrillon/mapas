@@ -13,8 +13,6 @@ function myFunctionJS(){
 	fileInput = document.getElementById('fileInput');
 	importFile = document.getElementById('importFile');
 
-	importFile.disabled = true;
-
 	$('#fileinput').on("change", function(){ 
 		if($('#fileinput').value != null){
 	    	$('#importfile').disabled = false;
