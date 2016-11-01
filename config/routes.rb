@@ -13,9 +13,12 @@ Rails.application.routes.draw do
     end
   end
 
-  root_to 'static_pages/maps'
+  get 'static_pages/maps'
+  
+  root to:              'static_pages#maps'
 
-  post 'import' => 'static_pages#import'
+
+  post 'import' =>      'static_pages#import'
 
   get 'help'    =>      'static_pages#help'
 
