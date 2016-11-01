@@ -15,6 +15,7 @@ function myFunctionJS(){
 
 	var importButton = document.getElementById('importfile');
 	importButton.disabled = true;
+	fileInput.value = null;
 
 	fileInput.onchange = function() {
 	    if(fileInput.value != null){
@@ -23,8 +24,6 @@ function myFunctionJS(){
 	    	importButton.disabled = true;
 	    }
 	}
-
-	$('.file').disabled = true;
 
 	$('.modal').on('hidden', function () {
 	  document.location.reload();
