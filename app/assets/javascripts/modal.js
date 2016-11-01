@@ -12,7 +12,7 @@ $('#importForm').bind('ajax:success', function() {
 
 var ready = function() {
   alert( 'works!' );
-  var fileInput = document.getElementById('file');
+    var fileInput = document.getElementById('file');
 	fileInput.accept=".csv,.xls,.xlsx,.xml";
 
 	var importButton = document.getElementById('importfile');
