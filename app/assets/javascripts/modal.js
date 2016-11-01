@@ -10,7 +10,10 @@ function myFunctionJS(){
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
 
-	$('#importfile').disabled = true;
+	fileInput = document.getElementById('fileInput');
+	importFile = document.getElementById('importFile');
+
+	importFile.disabled = true;
 
 	$('#fileinput').on("change", function(){ 
 		if($('#fileinput').value != null){
