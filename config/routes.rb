@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'static_pages/maps'
+  post 'static_pages/maps'
   
   root to:              'static_pages#maps'
-
 
   post 'import' =>      'static_pages#import'
 
