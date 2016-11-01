@@ -139,8 +139,9 @@
         <h2>Import Products</h2>
           <%= form_for 'static_pages/import', remote: true, :id => "importForm" do |f|%>
             <%= file_field_tag :id => "file" %>
-            <%= f.submit  "Import", :id => "importfile"%>
+            <%= f.submit  "Import", remote: true, :id => "importfile"%>
           <% end %>
+          <%= link_to 'Boton de Prueba', 'static_pages/import', remote: true %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="changeModalWindow('myModal3','myModal2')" id="btnAtrasModal3">Atrás</button>
