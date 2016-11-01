@@ -24,6 +24,8 @@ function myFunctionJS(){
 	    }
 	}*/
 
+	$('.file').disabled = true;
+
 	$('.modal').on('hidden', function () {
 	  document.location.reload();
 	})
