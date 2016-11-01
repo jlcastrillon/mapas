@@ -5,13 +5,7 @@ Rails.application.routes.draw do
 
   #get 'static_pages/configuracionEstadistica'
 
-  devise_for :users
-
-  resources :static_pages do
-    collection do
-      post :import
-    end
-  end
+  
 
   get 'static_pages/maps'
   
