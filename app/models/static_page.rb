@@ -11,16 +11,16 @@ class StaticPage
   	end
   end
 
-  def self.import(file)
-  	spreadsheet = Roo::Spreadsheet.open(file.path)
-  	header = spreadsheet.row(1)
-  	(2..spreadsheet.last_row).each do |i|
-    	row = Hash[[header, spreadsheet.row(i)].transpose]
-    	staticpage = find_by(id: row["id"]) || new
-    	staticpage.attributes = row.to_hash
-    	staticpage.save!
-  	end
-  end
+  #def self.import(file)
+  #	spreadsheet = Roo::Spreadsheet.open(file.path)
+  #	header = spreadsheet.row(1)
+  #	(2..spreadsheet.last_row).each do |i|
+   # 	row = Hash[[header, spreadsheet.row(i)].transpose]
+    #	staticpage = find_by(id: row["id"]) || new
+    #	staticpage.attributes = row.to_hash
+    #	staticpage.save!
+  #	end
+  #end
 
   def self.open_spreadsheet(file)
   	case File.extname(file.original_filename)
