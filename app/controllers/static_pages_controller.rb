@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
     @StaticPage =  StaticPage.import(params[:file])
     respond_to do |format|
       format.html
-      format.js { render 'new'}
+      format.js
     end
 
   end
