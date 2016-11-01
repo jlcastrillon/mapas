@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
   def import
     #@import = false;
     #if request.post?
-    @document =  Document.import(params[:fileinput])
+    @document =  Document.import(params[:_:id___fileinput__])
     respond_to do |format|
       format.js
       format.html { redirect_to :back }
