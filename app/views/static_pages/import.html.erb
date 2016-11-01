@@ -1,0 +1,5 @@
+<h2>Import Products</h2>
+<%= form_tag('static_pages/import', remote: true, :id => "importForm") do |f| %>
+  <%= file_field_tag :file %>
+  <%= submit_tag  "Import", :id => "importfile"%>
+<% end %>
