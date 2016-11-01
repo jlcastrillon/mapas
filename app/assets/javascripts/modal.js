@@ -13,6 +13,7 @@ $('#importForm').bind('ajax:success', function() {
 function myFunctionJS(){	
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
+	/*
 	var fileInput = document.getElementById('file');
 	fileInput.accept=".csv,.xls,.xlsx,.xml";
 
@@ -26,14 +27,7 @@ function myFunctionJS(){
 	    	importButton.disabled = true;
 	    }
 	}
-
-	$("#uploadForm").on('submit',function() {
-	    alert('Complete!');
-	});
-
-	$( "uploadForm" ).submit(function( event ) {
-	  event.preventDefault();
-	});
+	*/
 
 
 	// Get the modal
