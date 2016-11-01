@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   get 'static_pages/maps'
   post 'static_pages/maps'
-  get 'import'
+  
+  get 'import' =>      'static_pages#import'
   
   root to:              'static_pages#maps'
 
