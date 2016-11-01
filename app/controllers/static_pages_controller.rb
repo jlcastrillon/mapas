@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
     @import =  StaticPage.import(params[:file])
     respond_to do |format|
       format.html
-      format.js { redirect_to  'static_pages/import' }
+      format.js { redirect_to  '/static_pages/import' }
     end
 
   end
