@@ -10,6 +10,11 @@ $('#importForm').bind('ajax:success', function() {
 	console.log('ajax request');
 });
 
+
+$('.modal').on('hidden.bs.modal', function () {
+    location.reload();
+});
+
 function myFunctionJS(){	
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
