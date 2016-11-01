@@ -1,13 +1,11 @@
 class StaticPagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  respond_to :html, :json
   def import
     #@import = false;
     #if request.post?
     @StaticPage =  StaticPage.import(params[:file])
     respond_to do |format|
-      format.html
-      format.json
+      format.js
     end
 
   end
