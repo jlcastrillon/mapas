@@ -10,14 +10,9 @@ $('#importForm').bind('ajax:success', function() {
 	console.log('ajax request');
 });
 
-
-
-
-function myFunctionJS(){	
-
-	//Se habilita el boton solamente cuando se ha importado algun fichero
-	
-	var fileInput = document.getElementById('file');
+var ready = function() {
+  alert( 'works!' );
+  var fileInput = document.getElementById('file');
 	fileInput.accept=".csv,.xls,.xlsx,.xml";
 
 	var importButton = document.getElementById('importfile');
@@ -34,6 +29,17 @@ function myFunctionJS(){
 	$('.modal').on('hidden', function () {
 	  document.location.reload();
 	})
+};
+
+$(document).ready( ready );
+$(document).on( 'page:load', ready );
+
+
+function myFunctionJS(){	
+
+	//Se habilita el boton solamente cuando se ha importado algun fichero
+	
+	
 
 	// Get the modal
 	var modal = document.getElementById('myModal1');
