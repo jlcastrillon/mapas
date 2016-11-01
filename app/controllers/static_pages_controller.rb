@@ -5,8 +5,7 @@ class StaticPagesController < ApplicationController
     #if request.post?
     @StaticPage =  StaticPage.import(params[:file])
     respond_to do |format|
-      format.html {render :action => "maps"}
-      format.js {render :layout=>false}
+      format.js { render nothing: true } 
     end
 
   end
