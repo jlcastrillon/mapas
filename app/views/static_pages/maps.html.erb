@@ -138,7 +138,7 @@
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
           <%= form_tag 'import', remote: true, :html => { :multipart => true },:id => "fileform" do |f|%>
-            <%= file_field_tag :id => "file" %>
+            <%= file_field_tag :id => "fileinput" %>
             <%= submit_tag  "Import", remote: true, :accept => ".csv,.xls,.xlsx,.xml",:id => "importfile"%>
           <% end %>
       </div>
