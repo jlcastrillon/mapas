@@ -33,11 +33,4 @@ class StaticPagesController < ApplicationController
   def configuracionEstadistica
   end
 
-  def show
-    respond_to do |format|
-      format.html{ redirect_to  '/static_pages/maps' }
-      format.js { redirect_to  '/static_pages/import' }
-    end
-  end
-
 end
