@@ -9,7 +9,7 @@
 function myFunctionJS(){	
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
-	/*
+
 	$('#importfile').disabled = true;
 
 	$('#fileinput').on("change", function(){ 
@@ -24,7 +24,7 @@ function myFunctionJS(){
 	  document.location.reload();
 	})
 
-	*/
+	
 
 	// Get the modal
 	var modal = document.getElementById('myModal1');
