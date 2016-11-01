@@ -11,14 +11,12 @@ $('#importForm').bind('ajax:success', function() {
 });
 
 
-$('.modal').on('hidden.bs.modal', function () {
-    location.reload();
-});
+
 
 function myFunctionJS(){	
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
-	/*
+	
 	var fileInput = document.getElementById('file');
 	fileInput.accept=".csv,.xls,.xlsx,.xml";
 
@@ -32,8 +30,10 @@ function myFunctionJS(){
 	    	importButton.disabled = true;
 	    }
 	}
-	*/
 
+	$('.modal').on('hidden', function () {
+	  document.location.reload();
+	})
 
 	// Get the modal
 	var modal = document.getElementById('myModal1');
