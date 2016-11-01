@@ -12,7 +12,10 @@ Rails.application.routes.draw do
       post :import
     end
   end
+
   post 'static_pages/maps' => 'static_pages#maps'
+
+  get 'static_pages/maps'
 
   get 'help'    =>      'static_pages#help'
 
