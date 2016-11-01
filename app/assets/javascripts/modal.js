@@ -11,7 +11,7 @@ function myFunctionJS(){
 	//Se habilita el boton solamente cuando se ha importado algun fichero
 	
 	
-	/*var fileInput = document.getElementById('file');
+	var fileInput = document.getElementById('file');
 
 	var importButton = document.getElementById('importfile');
 	importButton.disabled = true;
@@ -22,7 +22,7 @@ function myFunctionJS(){
 	    }else{
 	    	importButton.disabled = true;
 	    }
-	}*/
+	}
 
 	$('.file').disabled = true;
 
