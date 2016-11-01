@@ -36,6 +36,7 @@ class StaticPagesController < ApplicationController
   def show
     respond_to do |format|
       format.js { redirect_to  '/static_pages/import' }
+    end
   end
 
 end
