@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   #get 'import' =>      'static_pages#import'
 
-  post '/static_pages/import' =>      'static_pages#import'
+  post '/' =>      'static_pages#import'
   post 'import' =>      'static_pages#import'
 
   get 'help'    =>      'static_pages#help'
