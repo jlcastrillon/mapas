@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'static_pages/maps'
 
+  get 'import'
+
   get 'help'    =>      'static_pages#help'
 
   get 'about'   =>      'static_pages#about'
