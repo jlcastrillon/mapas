@@ -137,7 +137,7 @@
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
-          <%= form_tag({:action => 'import'}, {:id => 'importForm'}) %>
+          <%= form_tag({:action => 'import'}, :multipart => true ,{:id => 'importForm'}) do %>
             <%= file_field_tag :id => "fileinput" %>
             <%= submit_tag "Import", :accept => ".csv,.xls,.xlsx,.xml",:id => "importfile"%>
           <% end %>
