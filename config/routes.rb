@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :static_pages do
+  resources :import do
     collection do
       post :import
     end
