@@ -137,7 +137,7 @@
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
-          <%= form_tag 'importForm', :url => '/static_pages/import', :multipart => true , :id => 'importForm', :remote => true do %>
+          <%= form_tag '/static_pages/import', :multipart => true , :id => 'importForm', :remote => true do %>
             <%= file_field_tag 'fileInput', :id => "fileinput" %>
             <%= submit_tag "Import", :accept => ".csv,.xls,.xlsx,.xml",:id => "importfile"%>
           <% end %>
