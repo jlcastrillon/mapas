@@ -138,7 +138,7 @@
         <h4 class=>Seleccionar archivo</h4> 
         <h2>Import Products</h2>
           <%= form_for 'static_pages/import', remote: true, :id => "importForm" do |f|%>
-            <%= f.file_field :file %>
+            <%= file_field_tag :id => "file" %>
             <%= f.submit  "Import", :id => "importfile"%>
           <% end %>
       </div>
