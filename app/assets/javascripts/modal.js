@@ -10,8 +10,19 @@ function myFunctionJS(){
 
 	//Se habilita el boton solamente cuando se ha importado algun fichero
 
-	fileInput = document.getElementById('fileInput');
-	importFile = document.getElementById('importFile');
+	var fileInput = document.getElementById('file');
+	fileInput.accept=".csv,.xls,.xlsx,.xml";
+
+	var importButton = document.getElementById('importfile');
+	importButton.disabled = true;
+
+	fileInput.onchange = function() {
+	    if(fileInput.value != null){
+	    	importButton.disabled = false;
+	    }else{
+	    	importButton.disabled = true;
+	    }
+	}
 
 	$('#fileinput').on("change", function(){ 
 		if($('#fileinput').value != null){
