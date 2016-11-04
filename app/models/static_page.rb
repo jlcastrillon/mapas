@@ -1,7 +1,7 @@
 class StaticPage
   include Mongoid::Document
   field :nombre, type: String
-  field :datos, type: Integer
+  field :datos, type: Binary
 
   def self.import(file)
   	CSV.foreach(file.path, headers: true) do |row|
