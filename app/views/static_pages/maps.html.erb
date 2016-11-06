@@ -340,6 +340,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFYS_LlvOWkFpSTfj7xbqW7WvK05KMFMQ&libraries=places&callback=initMap" async defer></script>
 
 <!--google charts api-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
 <script>
    google.load("visualization", "1", {packages:["corechart"]});
    google.setOnLoadCallback(dibujarGrafico);
@@ -362,7 +363,10 @@
      ).draw(data, options);
    }
  </script> 
- <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<body>
+Comenzando con Google Charts....
+<div id="GraficoGoogleChart-ejemplo-1" style="width: 800px; height: 600px">
+</div>
 
 <!-- <body onload="initMap()">
 	<div id="map"></div>
