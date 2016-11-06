@@ -344,28 +344,37 @@
 <script>
    google.load("visualization", "1", {packages:["corechart"]});
    google.setOnLoadCallback(dibujarGrafico);
-   function dibujarGrafico() {
+   function dibujarGrafico(titulo, datos) {
      // Tabla de datos: valores y etiquetas de la gráfica
-     var data = google.visualization.arrayToDataTable([
-       ['Texto', 'Valor numérico'],
-       ['Texto1', 20.21],
-       ['Texto2', 4.28],
-       ['Texto3', 17.26],
-       ['Texto4', 10.25]    
-     ]);
+     
      var options = {
-       title: 'Nuestro primer ejemplo con Google Charts'
+       title: titulo
      }
      // Dibujar el gráfico
      new google.visualization.ColumnChart( 
      //ColumnChart sería el tipo de gráfico a dibujar
-       document.getElementById('GraficoGoogleChart-ejemplo-1')
-     ).draw(data, options);
+       document.getElementById('grafico')
+     ).draw(datos, options);
    }
+
+   var data = google.visualization.arrayToDataTable([
+       ['Texto', 'Valor numérico'],
+       ['Madrid', 20],
+       ['Barcelona', 35],
+       ['Valencia', 41],
+       ['Murcia', 22],
+       ['Galicia', 5], 
+       ['Granada', 11]
+     ]);
+
+    var titulo = 'Nuestro primer ejemplo con Google Charts';
+    dibujarGrafico(titulo,data);
+
+
  </script> 
 <body>
 Comenzando con Google Charts....
-<div id="GraficoGoogleChart-ejemplo-1" style="width: 800px; height: 600px">
+<div id="grafico" style="width: 400px; height: 300px">
 </div>
 
 <!-- <body onload="initMap()">
