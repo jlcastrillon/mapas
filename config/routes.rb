@@ -7,11 +7,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  #resources :import do
-   # collection do
-   #   post :import
-   # end
-  #end
+  resources :static_pages do
+    collection do
+      post :import
+    end
+  end
 
   root to:              'static_pages#maps'
 
