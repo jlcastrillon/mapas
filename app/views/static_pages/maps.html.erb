@@ -158,9 +158,9 @@
 </div>
 
 <button type="button" class="btn btn-default" onclick="switchTypeMap()">Cambiar vista</button>
+<div id="GraficoGoogleChart-ejemplo-1" style="width: 800px; height: 600px">
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+
 <!--script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script-->
 <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA&libraries=places&sensor=false" async defer></script-->
 
@@ -337,9 +337,32 @@
   }
 
 </script>
-
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFYS_LlvOWkFpSTfj7xbqW7WvK05KMFMQ&libraries=places&callback=initMap" async defer></script>
+
+<!--google charts api-->
+<script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(dibujarGrafico);
+   function dibujarGrafico() {
+     // Tabla de datos: valores y etiquetas de la gráfica
+     var data = google.visualization.arrayToDataTable([
+       ['Texto', 'Valor numérico'],
+       ['Texto1', 20.21],
+       ['Texto2', 4.28],
+       ['Texto3', 17.26],
+       ['Texto4', 10.25]    
+     ]);
+     var options = {
+       title: 'Nuestro primer ejemplo con Google Charts'
+     }
+     // Dibujar el gráfico
+     new google.visualization.ColumnChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('GraficoGoogleChart-ejemplo-1')
+     ).draw(data, options);
+   }
+ </script> 
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
 
 <!-- <body onload="initMap()">
 	<div id="map"></div>
