@@ -8,19 +8,20 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  #resources :import do
-   # collection do
-   #   post :import
-   # end
-  #end
+  resources :static_pages do
+    collection do
+      post :import
+    end
+  end
 
   root to:              'static_pages#maps'
 
   get '/static_pages/import'
 
   post '/static_pages/import' => 'static_pages#import'
+  post '/import' => 'static_pages#import'
+ 
 
-  
   post 'import' =>      'static_pages#import'
 
   get 'help'    =>      'static_pages#help'

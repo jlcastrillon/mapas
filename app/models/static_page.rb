@@ -1,7 +1,7 @@
 class StaticPage
   include Mongoid::Document
   field :nombre, type: String
-  field :datos, type: Binary
+  field :datos, type: Integer
 
   def self.import(file)
   	CSV.foreach(file.path, headers: true) do |row|
@@ -10,17 +10,26 @@ class StaticPage
   		 staticpage.save!
   	end
   end
+ 
+ def self.import(upload)
+    name =  upload['datafile'].original_filename
+    directory = "public/data"
+    
+    path = File.join(directory, name)
+    
+    File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
+  end
 
-  #def self.import(file)
-  #	spreadsheet = Roo::Spreadsheet.open(file.path)
-  #	header = spreadsheet.row(1)
-  #	(2..spreadsheet.last_row).each do |i|
-   # 	row = Hash[[header, spreadsheet.row(i)].transpose]
-    #	staticpage = find_by(id: row["id"]) || new
-    #	staticpage.attributes = row.to_hash
-    #	staticpage.save!
-  #	end
-  #end
+   def self.import(file)
+  	spreadsheet = Roo::Spreadsheet.open(file.path)
+  	header = spreadsheet.row(1)
+  	(2..spreadsheet.last_row).each do |i|
+    	row = Hash[[header, spreadsheet.row(i)].transpose]
+    	staticpage = find_by(id: row["id"]) || new
+    	staticpage.attributes = row.to_hash
+    	staticpage.save!
+  	end
+  end
 
   def self.open_spreadsheet(file)
   	case File.extname(file.original_filename)
