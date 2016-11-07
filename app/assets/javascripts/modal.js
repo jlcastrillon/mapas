@@ -4,37 +4,30 @@
 //= require angular-animate
 //= require turbolinks
 //= require bootstrap
+//= require cookiesManager
 
+
+function crearCookie(name,value,days) {
+	if (days) {
+	    var date = new Date();
+	    date.setTime(date.getTime()+(days*24*60*60*1000));
+	    var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function eliminarCookie(name) {
+  crearCookie(name,"",-1);
+}
 
 function myFunctionJS(){	
 
-	//Se habilita el boton solamente cuando se ha importado algun fichero
-
-	var fileInput = document.getElementById('file');
-	fileInput.accept=".csv,.xls,.xlsx,.xml";
-
-	var importButton = document.getElementById('importfile');
-	importButton.disabled = true;
-
-	fileInput.onchange = function() {
-	    if(fileInput.value != null){
-	    	importButton.disabled = false;
-	    }else{
-	    	importButton.disabled = true;
-	    }
-	}
-
-	$('#fileinput').on("change", function(){ 
-		if($('#fileinput').value != null){
-	    	$('#importfile').disabled = false;
-	    }else{
-	    	$('#importfile').disabled = true;
-	    }
-	});
+	
 
 	$('.modal').on('hidden', function () {
 	  document.location.reload();
-	})
+	});
 
 	$('#importform').on("ajax:remotipartComplete", function(e, data){
 	  console.log(e, data)

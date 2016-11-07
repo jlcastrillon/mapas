@@ -8,7 +8,6 @@ class StaticPagesController < ApplicationController
       format.js
       format.html { redirect_to :back }
     end
-
   end
 
   def home

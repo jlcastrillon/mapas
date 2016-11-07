@@ -9,8 +9,8 @@
   </div>
 
 
-  <!-- Ventana modal 1 Configuración mapa -->
-  <div id="myModal1" class="modal" data-backdrop="static" data-keyboard="false">
+<!-- Ventana modal 1 Configuración mapa -->
+<div id="myModal1" class="modal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,9 +21,9 @@
         
         <h4 class=>Tipo de mapa</h4>
       		<form style="padding-left:30px; margin-bottom: 10px;" action="">
-			  <input type="radio" name="gender" value="male"> Satélite<br>
-			  <input type="radio" name="gender" value="female"> Híbrido<br>
-			  <input type="radio" name="gender" value="other"> Físico
+			  <input type="radio" name="mapa_tipo" id = "rb_satellite" value="satellite" > Satélite<br>
+			  <input type="radio" name="mapa_tipo" id = "rb_hybrid"  value="hybrid" > Híbrido<br>
+			  <input type="radio" name="mapa_tipo" id = "rb_terrain" value="terrain" > Físico
 			</form>
 
 		<h4 class=>Búsqueda de localización</h4>
@@ -35,7 +35,7 @@
  
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModal">Cerrar</button>
-        <button type="button" class="btn btn-primary" data-toggle= "modal" onclick="changeModalWindow('myModal1','myModal2')" data-target="#myModal2">Siguiente</button>
+        <button type="button" class="btn btn-primary" data-toggle= "modal" id="btnSiguienteModal1" onclick="changeModalWindow('myModal1','myModal2')" data-target="#myModal2">Siguiente</button>
       </div>
     </div>
   </div>
@@ -56,10 +56,10 @@
  			<input type="text" class="form-control" placeholder="Introduzca el título del gráfico" aria-describedby="basic-addon1">
 		</div>
 
-		<h3 class=>Nombre de las etiquetas</h4>
+		<!--h3 class=>Nombre de las etiquetas</h4>
         <div class="input-group">
  			<input type= "text" class="form-control" placeholder="Introduzca el nombre de las etiquetas" aria-describedby="basic-addon1">
- 		</div>
+ 		</div-->
  		
  		<h4 class=>Tipo de gŕafico</h4>
         <select class="form-control">
@@ -153,15 +153,19 @@
 
 </div>
 
-<div id="map" onload="initMap()">
+<div id = "map" class "form-control" >
 	
 </div>
 
 <button type="button" class="btn btn-default" onclick="switchTypeMap()">Cambiar vista</button>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script>
+
+<!--script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script-->
+<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA&libraries=places&sensor=false" async defer></script-->
 
 <script>
+
+//Funcionalidades de la api de google maps
 	var map;
 	var direccion = "";
 	var mapOptions;
@@ -174,8 +178,13 @@
  			mapTypeId: google.maps.MapTypeId.HYBRID
  		};
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);	
+    //registrarAutocompletarInput(document.getElementById('filtropaises'));
+    autocomplete = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */
+      (document.getElementById('pais')), {
+        types: ['geocode']
+      });
 	}
-
 	/* Localizar país */
 	function centerMap(direccion){
 		if (direccion != ""){
@@ -191,19 +200,144 @@
 			alert("¡Tienes que indicar un país!");
 		}
 	}
-
-	window.onload = initMap;
+	//window.onload = initMap;
 
 	function switchTypeMap(){
 	//var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-	if(map.getMapTypeId() == 'hybrid'){
-		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-	}
-	else{
-		map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-	}
-}
+  	if(map.getMapTypeId() == 'hybrid'){
+  		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+  	}
+  	else{
+  		map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+  	}
+  }
+
+  //Cambia o elige el tipo de mapa a renderizar
+  function changeType(mapType){
+    if(mapType == 'hybrid'){
+      map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+    }else if(mapType == 'terrain'){
+      map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+    }else if(mapType == 'satellite'){
+      map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+    }
+  }
+
+  function registrarAutocompletarInput(input){
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.setBounds(map.getBounds());
+  }
+
+
+//Funcionalidades del documento
+  $(function()
+  {
+    console.log('map configuration started');
+    //Se le asignan las funcionalidades a las ventanas modales
+    modal1();
+    modal2();
+    modal3();
+  });
+
+  //------------ventana modal 1--------------
+  function modal1(){
+    //cuando se escoge el tipo de mapa se guarda en las cookies
+    $('#rb_satellite').click(function(){
+      eliminarCookie('mapa_tipo');
+      crearCookie('mapa_tipo', 'satellite',1);
+    });
+    $('#rb_hybrid').click(function(){
+      eliminarCookie('mapa_tipo');
+      crearCookie('mapa_tipo', 'hybrid',1); 
+    });
+    $('#rb_terrain').click(function(){
+      eliminarCookie('mapa_tipo');
+      crearCookie('mapa_tipo', 'terrain',1);  
+      
+    });
+
+    //selecciona por defecto el tipo de mapa híbrido
+    $('#rb_hybrid').prop("checked", true);
+
+    $('#btnSiguienteModal1').click(
+        function(){
+          eliminarCookie('mapa_direccion');
+          crearCookie('mapa_direccion', $('#pais').val(),1);
+          console.log('cookies ' + document.cookie);  
+        }
+    );
+
+  }
+
+  //------------ventana modal 2 ---------------
+  function modal2(){
+    
+  }
+
+  //------------ventana modal 3 ---------------
+  function modal3(){
+    var fileInput = document.getElementById('file');
+    fileInput.accept=".csv,.xls,.xlsx,.xml";
+
+    var importButton = document.getElementById('importfile');
+    importButton.disabled = true;
+
+    fileInput.onchange = function() {
+        if(fileInput.value != null){
+          importButton.disabled = false;
+        }else{
+          importButton.disabled = true;
+        }
+    }
+
+    //se cierran las ventans modales una vez guardadas las configuraciones del mapa
+    $('#btnSiguienteModal3').click(
+          function(){
+            //centerMap(obtenerCookie('mapa_direccion'));
+            centerMap(obtenerCookie('mapa_direccion'));
+            changeType(obtenerCookie('mapa_tipo'));
+            console.log('cookies ' + document.cookie);
+          }
+      );
+  }
+
+
+
+//funciones auxiliares para el manejo de las Cookies
+  function crearCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    }
+    else var expires = "";
+    document.cookie = name+"="+value+expires+"; path=/";
+  }
+
+  function obtenerCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+  }
+
+  function eliminarCookie(name) {
+    crearCookie(name,"",-1);
+  }
+
+  function resetCookies(){
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+  }
+
 </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFYS_LlvOWkFpSTfj7xbqW7WvK05KMFMQ&libraries=places&callback=initMap" async defer></script>
 
 <!-- <body onload="initMap()">
 	<div id="map"></div>
