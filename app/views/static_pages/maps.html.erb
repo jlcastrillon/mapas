@@ -158,7 +158,7 @@
 </div>
 
 <button type="button" class="btn btn-default" onclick="switchTypeMap()">Cambiar vista</button>
-<div id="GraficoGoogleChart-ejemplo-1" style="width: 800px; height: 600px">
+<div id="grafico1" style="width: 450; height: 300;"></div>
 
 
 <!--script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script-->
@@ -344,21 +344,10 @@
 <script>
    google.load("visualization", "1", {packages:["corechart"]});
    google.setOnLoadCallback(dibujarGrafico);
-   function dibujarGrafico(titulo, datos) {
+   function dibujarGrafico() {
      // Tabla de datos: valores y etiquetas de la gráfica
-     
-     var options = {
-       title: titulo
-     }
-     // Dibujar el gráfico
-     new google.visualization.ColumnChart( 
-     //ColumnChart sería el tipo de gráfico a dibujar
-       document.getElementById('grafico')
-     ).draw(datos, options);
-   }
-
-   var data = google.visualization.arrayToDataTable([
-       ['Texto', 'Valor numérico'],
+     var data = google.visualization.arrayToDataTable([
+       ['Texto', 'numero'],
        ['Madrid', 20],
        ['Barcelona', 35],
        ['Valencia', 41],
@@ -366,16 +355,34 @@
        ['Galicia', 5], 
        ['Granada', 11]
      ]);
+     var options = {
+       title: 'Datos de España'
+     }
+     // Dibujar el gráfico
+     new google.visualization.ColumnChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico1')
+     ).draw(data, options);
 
-    var titulo = 'Nuestro primer ejemplo con Google Charts';
-    dibujarGrafico(titulo,data);
+     new google.visualization.LineChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico2')
+     ).draw(data, options);
 
+     new google.visualization.BarChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico3')
+     ).draw(data, options);
 
+     new google.visualization.PieChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico4')
+     ).draw(data, options);
+   }
  </script> 
-<body>
-Comenzando con Google Charts....
-<div id="grafico" style="width: 400px; height: 300px">
-</div>
+
+
+
 
 <!-- <body onload="initMap()">
 	<div id="map"></div>
