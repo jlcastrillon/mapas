@@ -5,7 +5,7 @@
   <p align="center", style="margin-bottom: 40px;">Es una aplicación sencilla para generar mapas estadísticos utilizando los datos que puedas subir.</p>
   
   <div class="span4 offset4 text-center">
-  	<button class="btn1 btn-primary btn-lg", style="margin-top: 25px" onclick="myFunctionJS()" id="btnMyModal">Comenzar</button>
+    <button class="btn1 btn-primary btn-lg", style="margin-top: 25px" onclick="myFunctionJS()" id="btnMyModal">Comenzar</button>
   </div>
 
 
@@ -20,16 +20,16 @@
       <div class="modal-body">
         
         <h4 class=>Tipo de mapa</h4>
-      		<form style="padding-left:30px; margin-bottom: 10px;" action="">
-			  <input type="radio" name="mapa_tipo" id = "rb_satellite" value="satellite" > Satélite<br>
-			  <input type="radio" name="mapa_tipo" id = "rb_hybrid"  value="hybrid" > Híbrido<br>
-			  <input type="radio" name="mapa_tipo" id = "rb_terrain" value="terrain" > Físico
-			</form>
+          <form style="padding-left:30px; margin-bottom: 10px;" action="">
+        <input type="radio" name="mapa_tipo" id = "rb_satellite" value="satellite" > Satélite<br>
+        <input type="radio" name="mapa_tipo" id = "rb_hybrid"  value="hybrid" > Híbrido<br>
+        <input type="radio" name="mapa_tipo" id = "rb_terrain" value="terrain" > Físico
+      </form>
 
-		<h4 class=>Búsqueda de localización</h4>
-		<div class="input-group">
- 			<input type="text" class="form-control" placeholder="Introduzca país o ciudad" aria-describedby="basic-addon1" id="pais">
-		</div>
+    <h4 class=>Búsqueda de localización</h4>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Introduzca país o ciudad" aria-describedby="basic-addon1" id="pais">
+    </div>
 
       </div>
  
@@ -53,28 +53,28 @@
 
         <h4 class=>Título del gráfico</h4>
         <div class="input-group">
- 			<input type="text" class="form-control" placeholder="Introduzca el título del gráfico" aria-describedby="basic-addon1">
-		</div>
+      <input type="text" class="form-control" placeholder="Introduzca el título del gráfico" aria-describedby="basic-addon1">
+    </div>
 
-		<!--h3 class=>Nombre de las etiquetas</h4>
+    <!--h3 class=>Nombre de las etiquetas</h4>
         <div class="input-group">
- 			<input type= "text" class="form-control" placeholder="Introduzca el nombre de las etiquetas" aria-describedby="basic-addon1">
- 		</div-->
- 		
- 		<h4 class=>Tipo de gŕafico</h4>
+      <input type= "text" class="form-control" placeholder="Introduzca el nombre de las etiquetas" aria-describedby="basic-addon1">
+    </div-->
+    
+    <h4 class=>Tipo de gŕafico</h4>
         <select class="form-control">
-        	<option value="0">Elija una opción</option>
-  			<option value="1">Gráfico de columnas</option>
-  			<option value="2">Gáfico de barras</option>
-  			<option value="3">Gráfico circular</option>
-  			<option value="4">Gráfico de anillos</option>
-  			<option value="5">Gráfico de burbujas</option>
-  			<option value="6">Gráfico de cajas</option>
-  			<option value="7">Gráfico compuesto</option>
-  			<option value="8">Histograma</option>
-		</select>
+          <option value="0">Elija una opción</option>
+        <option value="1">Gráfico de columnas</option>
+        <option value="2">Gáfico de barras</option>
+        <option value="3">Gráfico circular</option>
+        <option value="4">Gráfico de anillos</option>
+        <option value="5">Gráfico de burbujas</option>
+        <option value="6">Gráfico de cajas</option>
+        <option value="7">Gráfico compuesto</option>
+        <option value="8">Histograma</option>
+    </select>
       <div>
-    		<h4 class=>Colores del gŕafico</h4>
+        <h4 class=>Colores del gŕafico</h4>
         <div class = "colorContainer">
           <div class = "div-col-green"> </div>
           <input type="checkbox" id="greenchb" value="">
@@ -171,50 +171,50 @@
 <script>
 
 //Funcionalidades de la api de google maps
-	var map;
-	var direccion = "";
-	var mapOptions;
-	
-	/* Iniciar mapa */
-	function initMap() {
-		mapOptions = {
- 			center: new google.maps.LatLng(25.80, -80.30),
- 			zoom: 12,
- 			mapTypeId: google.maps.MapTypeId.HYBRID
- 		};
-		map = new google.maps.Map(document.getElementById("map"), mapOptions);	
+  var map;
+  var direccion = "";
+  var mapOptions;
+  
+  /* Iniciar mapa */
+  function initMap() {
+    mapOptions = {
+      center: new google.maps.LatLng(25.80, -80.30),
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);  
     //registrarAutocompletarInput(document.getElementById('filtropaises'));
     autocomplete = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */
       (document.getElementById('pais')), {
         types: ['geocode']
       });
-	}
-	/* Localizar país */
-	function centerMap(direccion){
-		if (direccion != ""){
-			var geocoder = new google.maps.Geocoder();
-			geocoder.geocode( {'address' : direccion}, function(results, status) {
-		    	if (status == google.maps.GeocoderStatus.OK) {
-		        	map.setCenter(results[0].geometry.location);
-		        	map.setZoom(6);
-			    }
-			});
-		}
-		else{
-			alert("¡Tienes que indicar un país!");
-		}
-	}
-	//window.onload = initMap;
+  }
+  /* Localizar país */
+  function centerMap(direccion){
+    if (direccion != ""){
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( {'address' : direccion}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              map.setCenter(results[0].geometry.location);
+              map.setZoom(6);
+          }
+      });
+    }
+    else{
+      alert("¡Tienes que indicar un país!");
+    }
+  }
+  //window.onload = initMap;
 
-	function switchTypeMap(){
-	//var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  	if(map.getMapTypeId() == 'hybrid'){
-  		map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-  	}
-  	else{
-  		map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-  	}
+  function switchTypeMap(){
+  //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    if(map.getMapTypeId() == 'hybrid'){
+      map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+    }
+    else{
+      map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+    }
   }
 
   //Cambia o elige el tipo de mapa a renderizar
@@ -402,11 +402,11 @@
     }
   </script>
 <!-- <body onload="initMap()">
-	<div id="map"></div>
+  <div id="map"></div>
 
-	<div class="input-group">
- 		<input type="text" class="form-control" placeholder="País o Ciudad" aria-describedby="basic-addon1" id="pais">
-		<button class="btn btn-danger" onclick="centerMap(document.getElementById('pais').value)">Ir!!</button>
-	</div>
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="País o Ciudad" aria-describedby="basic-addon1" id="pais">
+    <button class="btn btn-danger" onclick="centerMap(document.getElementById('pais').value)">Ir!!</button>
+  </div>
 
 </body> -->
