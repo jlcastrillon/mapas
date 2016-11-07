@@ -1,0 +1,12 @@
+<% if remotipart_submitted? %>
+  console.log('submitted via remotipart');
+<% else %>
+  console.log('submitted via jquery-ujs');
+<% end %>
+$('#parag').html('<%= @salida %>');
+
+var str = '{' + $('#parag').html() '}';
+
+var result = JSON.parse(str);
+
+console.log('accion show in json ' + str);

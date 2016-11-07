@@ -1,5 +1,9 @@
 class StaticPagesController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_filter :maps
+  
+  @salida = 'hola'
+
   def import
     #@import = false;
     #if request.post?
@@ -11,6 +15,7 @@ class StaticPagesController < ApplicationController
   end
 
   def home
+
   end
 
   def help
@@ -22,10 +27,29 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
-  def maps  
+  def maps
+    
+    if(cookies[:file_name])
+      logger.debug ("procesando cookie " + cookies[:file_name])
+      @salida = StaticPage.open_spreadsheet(cookies[:file_name])
+      logger.debug @salida 
+    end
+  end
+
+  def show
+    
+    if(cookies[:file_name])
+      logger.debug ("procesando cookie " + cookies[:file_name])
+      @salida = StaticPage.open_spreadsheet(cookies[:file_name])
+      logger.debug @salida 
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   def configuracionMapa
+
   end
 
   def configuracionEstadistica

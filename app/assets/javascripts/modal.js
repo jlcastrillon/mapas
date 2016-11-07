@@ -23,11 +23,6 @@ function eliminarCookie(name) {
 
 function myFunctionJS(){	
 
-	
-
-	$('.modal').on('hidden', function () {
-	  document.location.reload();
-	});
 
 	$('#importform').on("ajax:remotipartComplete", function(e, data){
 	  console.log(e, data)
@@ -55,10 +50,16 @@ function myFunctionJS(){
 	btnClose.onclick = function(){
 		modal.style.display = "none";
 	}
+
+	$('.container').on('hidden', '#myModal3', function (e) {
+	  e && e.delegateTarget.focus();
+	});
 }
 
 function changeModalWindow(idModalWindowParent, idModalWindow){
+	
 	document.getElementById(idModalWindowParent).style.display = "none";
 	document.getElementById(idModalWindow).style.display = "block";
+
 }
 

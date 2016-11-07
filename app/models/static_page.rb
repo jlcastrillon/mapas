@@ -12,12 +12,12 @@ class StaticPage
   #end
  
  def self.import(file)
-    name =  file.original_filename
-    directory = "public/data"
+      name =  file.original_filename
+      directory = 'public/data'
     
-    path = File.join(directory, name)
+      path = File.join(directory, name)
     
-    File.open(path, "wb") { |f| f.write(file.read) }
+      File.open(path, "wb") { |f| f.write(file.read) }
   end
 
    #def self.import(file)
@@ -32,11 +32,27 @@ class StaticPage
   #end
 
   def self.open_spreadsheet(file)
-  	case File.extname(file.original_filename)
-  	when '.csv' then Csv.new(file.path, nil, :ignore)
-  	when '.xls' then Excel.new(file.path, nil, :ignore)
-  	when '.xlsx' then Excelx.new(file.path, nil, :ignore)
-  	else raise "Unknown file type: #{file.original_filename}"
-  	end
-  end  
+    valor = ''
+    begin
+        logger.debug 'abriendo fichero'
+        directory = 'public/data'
+        path = File.join(directory, file)
+        spreadsheet = Roo::Spreadsheet.open(path)
+        logger.debug 'abierto'
+        spreadsheet.sheet(0).each do |r|
+          if valor != ''
+            valor += ','
+          end
+          valor += r.to_s
+        end
+      
+    rescue Exception
+      
+    end
+
+    return valor
+
+  end
+
+
 end
