@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :documents
   #get 'static_pages/configuracionMapa'
 
   #get 'static_pages/configuracionEstadistica'
