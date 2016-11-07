@@ -1,4 +1,4 @@
-  
+
 <div class="jumbotron">
   <div class="container">
   <h1 align="center", style="margin-bottom: 40px; margin-top: 10px;">Mapas Temáticos</h1>
@@ -158,10 +158,12 @@
 </div>
 
 <button type="button" class="btn btn-default" onclick="switchTypeMap()">Cambiar vista</button>
+<div id="grafico1" style="width: 450; height: 300;"></div>
 
 
 <!--script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA" async defer></script-->
 <!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb6BksSvuIGMLgJiP3PDT68LFEu6VVuwA&libraries=places&sensor=false" async defer></script-->
+
 
 <script>
 
@@ -335,9 +337,52 @@
   }
 
 </script>
-
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFYS_LlvOWkFpSTfj7xbqW7WvK05KMFMQ&libraries=places&callback=initMap" async defer></script>
+
+<!--google charts api-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(dibujarGrafico);
+   function dibujarGrafico() {
+     // Tabla de datos: valores y etiquetas de la gráfica
+     var data = google.visualization.arrayToDataTable([
+       ['Texto', 'numero'],
+       ['Madrid', 20],
+       ['Barcelona', 35],
+       ['Valencia', 41],
+       ['Murcia', 22],
+       ['Galicia', 5], 
+       ['Granada', 11]
+     ]);
+     var options = {
+       title: 'Datos de España'
+     }
+     // Dibujar el gráfico
+     new google.visualization.ColumnChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico1')
+     ).draw(data, options);
+
+     new google.visualization.LineChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico2')
+     ).draw(data, options);
+
+     new google.visualization.BarChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico3')
+     ).draw(data, options);
+
+     new google.visualization.PieChart( 
+     //ColumnChart sería el tipo de gráfico a dibujar
+       document.getElementById('grafico4')
+     ).draw(data, options);
+   }
+ </script> 
+
+
+
 
 <!-- <body onload="initMap()">
 	<div id="map"></div>
