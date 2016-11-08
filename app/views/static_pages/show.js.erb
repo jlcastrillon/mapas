@@ -3,6 +3,31 @@
 <% else %>
   console.log('submitted via jquery-ujs');
 <% end %>
-$('#parag').html('<%= @salida %>');
 
-console.log('accion show in json ');
+$('#parag').html('<%= @salida %>');
+$('#parag').hide();
+
+var tabla = JSON.parse($('#parag').html());
+
+if(tabla.length > 0){
+	var cLabels = tabla[0].length - 2;
+
+	//para cada ciudad se crea una tabla para visualizar
+	for(var i = 1;i < tabla.length;i++){
+
+		console.log('procesando ' + tabla[i][1]);
+		//se geocaliza la region y se agrega un marcador para poner el grafico
+		var datosi = [];
+
+		//se obtienen los datos a partir de las etiquetas y del valor asociado a las mismas
+		for(var j = 2;j <  tabla[0].length;j++){
+			datosi.push([tabla[0][j],tabla[i][j]]);
+		}
+		
+		//se agrega un marcador a esa ciudad con el gráfico correspondiente
+		agregarDatoAMapa(tabla[i][1],getChart(datosi));
+	}
+
+}
+
+

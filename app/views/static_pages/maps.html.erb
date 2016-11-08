@@ -32,7 +32,7 @@
     </div>
 
       </div>
- 
+      <h1 id='notificador1' style='float:left;margin-left:20px;font-size:14px !important;display:none !important;color: red !important;'>notificacion</h1>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCloseModal">Cerrar</button>
         <button type="button" class="btn btn-primary" data-toggle= "modal" id="btnSiguienteModal1" data-target="#myModal2">Siguiente</button>
@@ -53,25 +53,23 @@
 
         <h4 class=>Título del gráfico</h4>
         <div class="input-group">
-      <input type="text" class="form-control" placeholder="Introduzca el título del gráfico" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" placeholder="Introduzca el título del gráfico" aria-describedby="basic-addon1" id = "titulo_grafico">
     </div>
-
     <!--h3 class=>Nombre de las etiquetas</h4>
         <div class="input-group">
       <input type= "text" class="form-control" placeholder="Introduzca el nombre de las etiquetas" aria-describedby="basic-addon1">
     </div-->
-    
     <h4 class=>Tipo de gŕafico</h4>
-        <select class="form-control">
-          <option value="0">Elija una opción</option>
-        <option value="1">Gráfico de columnas</option>
-        <option value="2">Gáfico de barras</option>
-        <option value="3">Gráfico circular</option>
-        <option value="4">Gráfico de anillos</option>
-        <option value="5">Gráfico de burbujas</option>
-        <option value="6">Gráfico de cajas</option>
-        <option value="7">Gráfico compuesto</option>
-        <option value="8">Histograma</option>
+        <select class="form-control" id = "tipo_grafico">
+          <!--option value="none">Elija una opción</option-->
+        <option value="column">Gráfico de columnas</option>
+        <option value="bar">Gáfico de barras</option>
+        <option value="circular">Gráfico circular</option>
+        <option value="anillos">Gráfico de anillos</option>
+        <option value="burbujas">Gráfico de burbujas</option>
+        <option value="cajas">Gráfico de cajas</option>
+        <option value="compuesto">Gráfico compuesto</option>
+        <option value="histograma">Histograma</option>
     </select>
       <div>
         <h4 class=>Colores del gŕafico</h4>
@@ -136,12 +134,14 @@
       </div>
       <div class="modal-body">
         <h4 class=>Seleccionar archivo</h4> 
+        
         <h2>Import Products</h2>
           <%= form_tag import_static_pages_path, multipart: true, :remote => true do %>
             <%= file_field_tag :file %>
             <%= submit_tag "Import",:id => "importfile" %>
           <% end %>
       </div>
+      <h1 id='notificador3' style='float:left;margin-left:20px;color:green !important;font-size:14px !important;display:none !important'></h1>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" onclick="changeModalWindow('myModal3','myModal2')" id="btnAtrasModal3">Atrás</button>
         <!--button type="button" class="btn btn-primary" data-toggle= "modal" id="btnSiguienteModal3" data-target="#myModal2">Guardar</button-->
@@ -150,16 +150,13 @@
     </div>
   </div>
 </div>
-
-
-
 </div>
 
 
 
 <div id = "map" class "form-control" >
 </div>
-<p id = "parag">El valor es <%= @salida %> </p>
+<p id = "parag" display = "none"></p>
 
 <button type="button" class="btn btn-default" onclick="switchTypeMap()">Cambiar vista</button>
 <div id="chart_div"></div>
@@ -174,6 +171,7 @@
   var map;
   var direccion = "";
   var mapOptions;
+  var marcadores = [];
   
   /* Iniciar mapa */
   function initMap() {
@@ -235,6 +233,47 @@
   }
 
 
+
+  function agregarDatoAMapa(lugar,grafico){
+    console.log('agregando dato ' + lugar + ' a mapa');
+
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( {'address' : lugar}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            console.log('se localizo ' + lugar);
+
+            var marker = new google.maps.Marker({
+              position: results[0].geometry.location,
+              map: map,
+              title: lugar
+            });
+
+
+            
+            var infowindow = new google.maps.InfoWindow({
+              content: grafico
+            });
+
+            marker.addListener('click', function(){
+                infowindow.open(map, marker);
+            });
+
+            marcadores.push(marker);
+
+        }else{
+          console.log('no se pudo geolocalizar ' + lugar + ', status ' + status);
+        }
+    });
+  }
+
+  function eliminarMarcadores(){
+    for(var i = 0;i < marcadores.length;i++){
+      marcadores[i].map = null;
+    }
+    marcadores = [];
+  }
+
+
 //Funcionalidades del documento
   $(function()
   {
@@ -260,8 +299,7 @@
     });
     $('#rb_terrain').click(function(){
       eliminarCookie('mapa_tipo');
-      crearCookie('mapa_tipo', 'terrain',1);  
-      
+      crearCookie('mapa_tipo', 'terrain',1);
     });
 
     //selecciona por defecto el tipo de mapa híbrido
@@ -275,7 +313,8 @@
           if($('#pais').val() != null && $('#pais').val() != "")
             changeModalWindow('myModal1','myModal2')
           else{
-            alert('Por favor, selecciona una localidad.');
+             notificarModal1('Por favor, selecciona una localidad.');
+             //alert('Por favor, selecciona una localidad.');
              e.stopPropagation();
           }
         }
@@ -308,9 +347,13 @@
     $('#btnSiguienteModal3').click(
         function(){
           //centerMap(obtenerCookie('mapa_direccion'));
+          eliminarMarcadores();
+
           centerMap(obtenerCookie('mapa_direccion'));
           changeType(obtenerCookie('mapa_tipo'));
           crearCookie('file_name',$('#file').val().split('\\').pop(),1);
+          crearCookie('titulo_grafico',$('#titulo_grafico').val(),1);
+          crearCookie('tipo_grafico',$('#tipo_grafico').val(),1);
           console.log('cookies ' + document.cookie);
           $.ajax({
               type: "GET",
@@ -318,14 +361,35 @@
               url: "static_pages/maps",
               success: function(data){}
           }); 
-
-         $('.modal').modal('hide');
-
+          $('.modal').modal('hide');
         }
     );
-
   }
 
+  function notificarModal1(text)
+  {
+    $("#notificador1").attr('class','color: red !important;');
+    $("#notificador1").html(text);
+    $("#notificador1").show();
+    setTimeout('$("#notificador1").hide()',5000);
+  }
+
+  function notificarModal2(text)
+  {
+    $("#notificador2").html(text);
+    $("#notificador2").show('slow');
+    setTimeout('$("#notificador1").hide("slow")',5000);
+  }
+
+
+  function notificarModal3(text)
+  {
+    $("#notificador3").html(text);
+    $("#notificador3").show();
+    setTimeout('$("#notificador3").hide()',5000);
+  }
+
+  
 
 
 //funciones auxiliares para el manejo de las Cookies
@@ -356,7 +420,7 @@
 
   function resetCookies(){
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-  }
+  } 
 
 </script>
 
@@ -364,7 +428,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFYS_LlvOWkFpSTfj7xbqW7WvK05KMFMQ&libraries=places&callback=initMap" async defer></script>
 
 
-<!--Load the AJAX API-->
+<!--Api de google chart-->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
 
@@ -372,33 +436,72 @@
     google.charts.load('current', {'packages':['corechart']});
 
     // Set a callback to run when the Google Visualization API is loaded.
-    google.charts.setOnLoadCallback(drawChart);
+    //google.charts.setOnLoadCallback(drawChart);
 
     // Callback that creates and populates a data table,
     // instantiates the pie chart, passes in the data and
     // draws it.
-    function drawChart() {
+    function getChart(datos) {
+
+      var nodo =  document.createElement("div");
+
+      var tipoGrafico = obtenerCookie('tipo_grafico');
+      var tit = obtenerCookie('titulo_grafico');
 
       // Create the data table.
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
-      data.addColumn('number', 'Slices');
-      data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-      ]);
+      data.addColumn('number', 'valor');
+      data.addRows(datos);
+
+
+      
+      
 
       // Set chart options
-      var options = {'title':'How Much Pizza I Ate Last Night',
+      var options = {'title': tit,
                      'width':400,
-                     'height':300};
+                     'height':300
+                   };
+
+
+      /*<option value="column">Gráfico de columnas</option>
+      <option value="bar">Gáfico de barras</option>
+      <option value="circular">Gráfico circular</option>
+      <option value="anillos">Gráfico de anillos</option>
+      <option value="burbujas">Gráfico de burbujas</option>
+      <option value="cajas">Gráfico de cajas</option>
+      <option value="compuesto">Gráfico compuesto</option>
+      <option value="histograma">Histograma</option>*/
 
       // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+      var chart;
+      if(tipoGrafico == 'circular'){
+        chart = new google.visualization.PieChart(nodo);
+      }else if(tipoGrafico == 'bar'){
+        chart = new google.visualization.BarChart(nodo);
+      }else if(tipoGrafico == 'anillos'){
+        options = {'title': tit,
+                     'width':400,
+                     'height':300,
+                     pieHole: 0.4
+                   };
+        chart = new google.visualization.PieChart(nodo);
+      }else if(tipoGrafico == 'burbujas'){
+        chart = new google.visualization.BarChart(nodo);
+      }else if(tipoGrafico == 'cajas'){
+        chart = new google.visualization.BarChart(nodo);
+      }else if(tipoGrafico == 'compuesto'){
+        chart = new google.visualization.BarChart(nodo);
+      }else if(tipoGrafico == 'histogram'){
+        chart = new google.visualization.ColumnChart(nodo);
+      }else{
+        chart = new google.visualization.ColumnChart(nodo);
+      }
       chart.draw(data, options);
+
+      return nodo;
     }
   </script>
 <!-- <body onload="initMap()">

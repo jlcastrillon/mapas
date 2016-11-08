@@ -32,7 +32,7 @@ class StaticPage
   #end
 
   def self.open_spreadsheet(file)
-    valor = ''
+    valor = '['
     begin
         logger.debug 'abriendo fichero'
         directory = 'public/data'
@@ -40,7 +40,7 @@ class StaticPage
         spreadsheet = Roo::Spreadsheet.open(path)
         logger.debug 'abierto'
         spreadsheet.sheet(0).each do |r|
-          if valor != ''
+          if valor != '['
             valor += ','
           end
           valor += r.to_s
@@ -49,6 +49,8 @@ class StaticPage
     rescue Exception
       
     end
+
+    valor += ']'
 
     return valor
 
